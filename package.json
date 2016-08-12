@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-index": "electron index.electron.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,7 @@
   },
   "homepage": "https://github.com/dnvy0084/svg_tutorial#readme",
   "devDependencies": {
+    "babel-core": "^6.13.2",
     "electron": "^1.3.3"
-  },
-  "scripts": {
-    "start-index": "electron index.electron.js"
   }
 }
