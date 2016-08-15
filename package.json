@@ -18,6 +18,8 @@
   "homepage": "https://github.com/dnvy0084/svg_tutorial#readme",
   "devDependencies": {
     "babel-core": "^6.13.2",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-es2015-loose": "^7.0.0",
     "electron": "^1.3.3"
   }
 }

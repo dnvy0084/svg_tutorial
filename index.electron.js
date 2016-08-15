@@ -8,6 +8,8 @@ var win = null;
 
 app.on( "ready", function(){
 
+	console.log( "App Ready", __filename, __dirname );
+
 	win = new BrowserWindow( { width: 1600, height: 1024 } );
 
 	win.loadURL( "file://" + __dirname + "/src/index.html" );
