@@ -15,23 +15,104 @@
     <div id="content"></div>
     <!--<script type="text/babel" src="scripts/example.js"></script>-->
     <script type="text/babel">
-      // To get started with this tutorial running your own code, simply remove
-      // the script tag loading scripts/example.js and start writing code here.
       
-      window.onload = function(){
-        console.log( ReactDOM );
-      }
+      var data = [
+        { id: 1, author: "Pete", text: "This is one comment" },
+        { id: 2, author: "Jordan", text: "This is *another* comment" }
+      ];
       
-      console.log( React, ReactDOM );
-      
-      var CommentBox = React.createClass({
+      var Comment,
+          CommentList, 
+          CommentForm, 
+          CommentBox;
+
+      Comment = React.createClass({
+
+        rawMarkup: function(){
+
+          var md = new Remarkable();
+          var _html = md.render( this.props.children.toString() );
+
+          return { __html: _html };
+        },
+
+        render: function(){
+
+          return (
+            <div className="comment">
+              <h3 className="commentAuthor">
+                {this.props.author}
+              </h3>
+              <span dangerouslySetInnerHTML={this.rawMarkup()}/>
+            </div>
+          );
+        }
+      });
+
+      CommentList = React.createClass({
+
+        render: function(){
+
+          var nodes = this.props.data.map( (comment)=>{
+            return (
+              <Comment author={comment.author} key={comment.id}>
+                {comment.text}
+              </Comment>
+            )
+          });
+          return (
+            <div className="commentList">
+              {nodes}
+            </div>
+          )
+        }
+      });
+
+      CommentForm = React.createClass({
+
+        render: function(){
+          return (
+            <div className="commentForm">
+              ------------------------- comment form
+            </div>
+          )
+        }
+      });
+
+      CommentBox = React.createClass({
+
+        getInitialState: function(){
+          return {data: []};
+        },
+
+        loadComments: function(){
+          $.ajax({
+            url: this.props.url,
+            dataType: "json",
+            cache: false,
+            success: (data)=>{
+              this.setState( {data: data} );
+            },
+            error: (xhr, status, err)=>{
+              console.error( this.props.url, status, err.toString() );
+            }
+          });
+        },
+
+        componentDidMount: function(){
+
+          this.loadComments();
+          setInterval( this.loadComments, this.props.pollInterval );
+        },
 
         render: function(){
 
           return (
 
             <div className="commentBox">
-              Hello, world! I am a CommentBox.
+              <h1>Comments</h1>
+              <CommentList data={this.state.data}/>
+              <CommentForm />
             </div>
           );
         }
@@ -39,7 +120,7 @@
 
       ReactDOM.render( 
 
-        <CommentBox />,
+        <CommentBox url="/api/comments" pollInterval={2000}/>,
         document.getElementById( "content" )
       )
     </script>
