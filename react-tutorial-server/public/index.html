@@ -11,6 +11,12 @@
     <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
     <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
   </head>
+  <style type="text/css">
+    .commentAuthor{
+      color: white;
+      background-color: #909090;
+    }
+  </style>
   <body>
     <div id="content"></div>
     <!--<script type="text/babel" src="scripts/example.js"></script>-->
@@ -70,10 +76,58 @@
 
       CommentForm = React.createClass({
 
+        getInitialState: function(){
+
+          return { author: "", text: "" };
+        },
+
+        onAuthorChange: function(e){
+          this.setState( {author: e.target.value } );
+        },
+
+        onTextChange: function(e){
+          this.setState( {text: e.target.value} );
+        },
+
+        onClick: function(e){
+          e.preventDefault();
+
+          console.log( this.state );
+
+          var author = this.state.author.trim();
+          var text = this.state.text.trim();
+
+          if( !text || !author ) return;
+
+          this.props.onCommentSubmit({
+            author: author,
+            text: text
+          });
+
+          this.setState({
+            author: "",
+            text: ""
+          });
+        },
+
         render: function(){
           return (
             <div className="commentForm">
-              ------------------------- comment form
+              <form className="commentForm" onSubmit={this.onClick}>
+                <input 
+                  type="text" 
+                  placeholder="Your name.." 
+                  value={this.state.author}
+                  onChange={this.onAuthorChange}
+                ></input>
+                <input 
+                  type="text" 
+                  placeholder="say something.."
+                  value={this.state.text}
+                  onChange={this.onTextChange}
+                ></input>
+                <input type="submit" value="Post"/>
+              </form>
             </div>
           )
         }
@@ -86,6 +140,7 @@
         },
 
         loadComments: function(){
+
           $.ajax({
             url: this.props.url,
             dataType: "json",
@@ -95,6 +150,28 @@
             },
             error: (xhr, status, err)=>{
               console.error( this.props.url, status, err.toString() );
+            }
+          });
+        },
+
+        onCommentSubmit: function(comment){
+
+          var comments = this.state.data;
+
+          comment.id = Date.now();
+
+          this.setState( { data: comments } );
+
+          $.ajax({
+            url: this.props.url,
+            dataType: "json",
+            type: "POST",
+            data: comment,
+            success: (data)=>{
+              this.setState( {data: data} );
+            },
+            error: (xhr, status, err)=>{
+              console.log( this.props.url, status, err.toString() );
             }
           });
         },
@@ -112,7 +189,7 @@
             <div className="commentBox">
               <h1>Comments</h1>
               <CommentList data={this.state.data}/>
-              <CommentForm />
+              <CommentForm onCommentSubmit={this.onCommentSubmit}/>
             </div>
           );
         }
