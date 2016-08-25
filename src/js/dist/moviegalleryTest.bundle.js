@@ -54,13 +54,22 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _QueryInput = __webpack_require__(177);
+	var _MovieSearchList = __webpack_require__(184);
 	
-	var _QueryInput2 = _interopRequireDefault(_QueryInput);
+	var _MovieSearchList2 = _interopRequireDefault(_MovieSearchList);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	_reactDom2.default.render(_react2.default.createElement(_QueryInput2.default, null), document.getElementById("wrapper"));
+	_reactDom2.default.render(_react2.default.createElement(
+		"div",
+		null,
+		_react2.default.createElement(
+			"h1",
+			null,
+			"Movie Search"
+		),
+		_react2.default.createElement(_MovieSearchList2.default, null)
+	), document.getElementById("wrapper"));
 
 /***/ },
 /* 1 */
@@ -21432,7 +21441,7 @@
 	
 				e.preventDefault();
 	
-				this.props.onSubmit(this.refs.queryInput.value);
+				this.props.onSubmit(this.props.type, this.refs.queryInput.value);
 			}
 		}, {
 			key: "render",
@@ -21441,6 +21450,7 @@
 					"form",
 					{ className: "query-input" },
 					_react2.default.createElement("input", { type: "text", className: "query-input-text",
+						placeholder: "search movie..",
 						ref: "queryInput" }),
 					_react2.default.createElement("input", { type: "submit", className: "query-input-submit",
 						onClick: this.onClick })
@@ -21453,10 +21463,197 @@
 	
 	exports.default = QueryInput;
 	QueryInput.defaultProps = {
+		type: "undefined",
 		onSubmit: function onSubmit(query) {
 			console.log("onSubmit", query);
 		}
 	};
+
+/***/ },
+/* 178 */,
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _LinkedText = __webpack_require__(183);
+	
+	var _LinkedText2 = _interopRequireDefault(_LinkedText);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SearchList = function (_Component) {
+		_inherits(SearchList, _Component);
+	
+		function SearchList() {
+			_classCallCheck(this, SearchList);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(SearchList).call(this));
+		}
+	
+		_createClass(SearchList, [{
+			key: "render",
+			value: function render() {
+	
+				var nodes = [];
+	
+				for (var i = 0; i < 10; i++) {
+					nodes.push(_react2.default.createElement(_LinkedText2.default, {
+						"class": "search-list-item",
+						link: "http://www.naver.com",
+						text: "some link" + i,
+						key: "li" + i }));
+				}
+	
+				return _react2.default.createElement(
+					"div",
+					null,
+					nodes
+				);
+			}
+		}]);
+	
+		return SearchList;
+	}(_react.Component);
+	
+	exports.default = SearchList;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LinkedText = function (_Component) {
+		_inherits(LinkedText, _Component);
+	
+		function LinkedText() {
+			_classCallCheck(this, LinkedText);
+	
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(LinkedText).call(this));
+		}
+	
+		_createClass(LinkedText, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"li",
+					{ className: this.props.class },
+					_react2.default.createElement(
+						"a",
+						{ href: this.props.link },
+						this.props.text
+					)
+				);
+			}
+		}]);
+	
+		return LinkedText;
+	}(_react.Component); //class
+	
+	
+	exports.default = LinkedText;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SearchList = __webpack_require__(182);
+	
+	var _SearchList2 = _interopRequireDefault(_SearchList);
+	
+	var _QueryInput = __webpack_require__(177);
+	
+	var _QueryInput2 = _interopRequireDefault(_QueryInput);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var MovieSearchList = function (_Component) {
+		_inherits(MovieSearchList, _Component);
+	
+		function MovieSearchList() {
+			_classCallCheck(this, MovieSearchList);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MovieSearchList).call(this));
+	
+			_this.onSubmit = _this.onSubmit.bind(_this);
+			return _this;
+		}
+	
+		_createClass(MovieSearchList, [{
+			key: "onSubmit",
+			value: function onSubmit(type, query) {}
+		}, {
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					{ className: "movie-search-list" },
+					_react2.default.createElement(_QueryInput2.default, { onSubmit: this.onSubmit }),
+					_react2.default.createElement(_SearchList2.default, null)
+				);
+			}
+		}]);
+	
+		return MovieSearchList;
+	}(_react.Component);
+	
+	exports.default = MovieSearchList;
 
 /***/ }
 /******/ ]);

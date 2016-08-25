@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import QueryInput from "./comps/QueryInput";
+import MovieSearchList from "./comps/MovieSearchList";
 
 ReactDOM.render(
-	<QueryInput />,
+	<div>
+		<h1>Movie Search</h1>
+		<MovieSearchList />
+	</div>,
 	document.getElementById( "wrapper" )
 );

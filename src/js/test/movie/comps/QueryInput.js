@@ -12,13 +12,14 @@ export default class QueryInput extends Component{
 
 		e.preventDefault();
 		
-		this.props.onSubmit( this.refs.queryInput.value )
+		this.props.onSubmit( this.props.type, this.refs.queryInput.value )
 	}
 
 	render(){
 		return (
 			<form className="query-input">
 				<input type="text" className="query-input-text"
+					placeholder="search movie.."
 					ref="queryInput" />
 				<input type="submit" className="query-input-submit"
 					onClick={this.onClick} />
@@ -29,5 +30,6 @@ export default class QueryInput extends Component{
 } //class
 
 QueryInput.defaultProps = {
+	type: "undefined",
 	onSubmit: ( query )=>{ console.log( "onSubmit", query ) }
 }
