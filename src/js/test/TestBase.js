@@ -16,7 +16,7 @@ export default class TestBase{
 
 		ReactDom.render(
 
-			<h1>Hello, world!</h1>,
+			<div>Hello, world!</div>,
 			section
 		);
 	}
