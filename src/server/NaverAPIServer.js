@@ -1,19 +1,30 @@
 
-var https = require( "https" ),
+const https = require( "https" ),
 	http = require( "http" ),
 	stream = require( "stream" );
 
-var options = {
+const headers = {
+		'X-Naver-Client-Id': 'mPoltG5IBWUeFqYF0PP2',
+		'X-Naver-Client-Secret': '1tWAAEU_Yd'
+	}
+
+const movie = {
 
 	hostname: "openapi.naver.com",
 	port: 443,
 	path: "/v1/search/movie.xml",
 	method: "GET",
-	headers: {
-		'X-Naver-Client-Id': 'mPoltG5IBWUeFqYF0PP2',
-		'X-Naver-Client-Secret': '1tWAAEU_Yd'
-	}
+	headers: headers
 };
+
+const image = {
+
+	hostname: "openapi.naver.com",
+	port: 443,
+	path: "v1/search/image.xml",
+	method: "GET",
+	headers: headers
+}
 
 const ResponseHeader = {
 	'Content-Type': 'text/xml',
@@ -31,7 +42,7 @@ function validate( req, res ){
 
 		case "/movie":
 			pipe( 
-				appendQuery( options , (url.match( /\?.+/g )||[])[0] ),
+				appendQuery( movie , (url.match( /\?.+/g )||[])[0] ),
 				res 
 			);
 			break;
