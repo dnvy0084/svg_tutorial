@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import LinkedText from "./LinkedText";
+import SearchListItem from "./SearchListItem";
 
 export default class SearchList extends Component{
 	
@@ -9,21 +9,25 @@ export default class SearchList extends Component{
 
 	render(){
 
-		let nodes = [];
+		let data = this.props.dataprovider,
+			items = data.display > 1 ? data.item : [ data.item ],
+			nodes = [];
 
-		for( var i = 0; i < 10; i++ ){
+		items.forEach( (item, i)=>{
+
+			if( !item ) return;
+
 			nodes.push(
-				<LinkedText 
-					class="search-list-item"
-					link="http://www.naver.com" 
-					text={ "some link" + i }
-					key={ "li" + i } />
+				<SearchListItem item={item} key={ "item" + i } />
 			);
-		}
+		})
 
 		return (
-			<div>
-				{nodes}
+			<div className="search-list">
+				<h1>{data.title}</h1>
+				<ul>
+					{nodes}
+				</ul>
 			</div>
 		);
 	}

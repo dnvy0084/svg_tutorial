@@ -17,7 +17,7 @@ var options = {
 
 const ResponseHeader = {
 	'Content-Type': 'text/xml',
-	'Access-Control-Allow-Origin': 'http://localhost:8090'
+	'Access-Control-Allow-Origin': '*'
 };
 
 http.createServer().on( "request", validate ).listen( 8080 );
